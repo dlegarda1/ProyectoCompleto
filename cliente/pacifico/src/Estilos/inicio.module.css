@@ -1,0 +1,56 @@
+/*@value fuente #030637;
+@value fondo  #3C0753;
+@value fondo2 #720455;
+@value fondo3 #910A67;
+@value sombra #030637;
+@value borde  #910A67;*/
+
+@value colors: './colores.module.css';
+@value fuente, fondo, fondo1, fondo2, sombra, borde from colors;
+
+
+.main {
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 3px solid borde;
+    color: fuente;
+}
+
+.contenedor {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 2em;
+    border: 2px solid borde;
+    border-radius: 2px;
+    padding: 20px;
+    box-shadow: 4px 5px 5px 0px sombra;
+}
+
+.personajes {
+    justify-content: center;
+    align-items: center;
+    background-color: fondo;
+    height: 800px;
+    border: 3px solid borde;
+    overflow: hidden;
+    margin: 5px;
+    padding: 2px;
+    border-radius: 10px;
+    box-shadow: 4px 5px 5px 0px sombra;
+}
+
+.personajes img {
+    aspect-ratio: 1/1;
+    width: 100%;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+   
+
+    .personajes {
+        width: 80%;
+    }
+}

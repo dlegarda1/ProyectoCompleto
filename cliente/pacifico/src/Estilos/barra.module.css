@@ -1,0 +1,46 @@
+@value colors: './colores.module.css';
+@value fuente,fondo,fondo1,fondo2,sombra,borde from colors;
+header{
+    background-color:fondo;       
+    padding: 10px 20px;
+}
+.contenedor{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo{
+    color:fuente;
+    font-size:1.5rem;
+    font-weight:bold;
+}
+.logo:hover{
+    color:fondo2;
+}
+.logo img {
+    width: 100px; 
+    height: auto;
+}
+nav{
+    height:40px;
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav a{
+    color:fuente;
+    text-decoration:none;
+    margin:0 10px;
+    font-size:1.2rem;
+    font-weight:bold;
+}
+nav a:hover{
+    color:fondo2;   
+}
+
+.menu{
+    display: none; /* Por defecto, el ícono del menú hamburguesa está oculto */
+}
+

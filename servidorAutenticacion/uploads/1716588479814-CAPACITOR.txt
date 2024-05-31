@@ -1,0 +1,53 @@
+% Datos conocidos
+Volumen = 2.5; % Volumen en metros cúbicos
+Capacitancia = 81.14e-6; % Capacitancia en faradios
+Permitividad = 8.85e-12; % Permitividad en faradios por metro
+
+% Radio interno (dado)
+r_interno = 0.001; % Radio interno en metros
+
+% Función a resolver
+fun = @(r_externo) pi * r_externo^2 * (Volumen - (2 * pi * r_interno^2 * log(r_externo/r_interno)) / (Capacitancia * Permitividad));
+
+% Resolver la ecuación utilizando el método de la bisección
+a = r_interno; % Límite inferior (radio interno)
+b = 1; % Límite superior (seleccionar un valor adecuado)
+
+tolerancia = 1e-6; % Tolerancia para la precisión de la solución
+max_iteraciones = 100; % Número máximo de iteraciones
+
+% Inicializar variables
+iteracion = 0;
+error = inf;
+
+% Iterar hasta alcanzar la tolerancia o el número máximo de iteraciones
+while error > tolerancia && iteracion < max_iteraciones
+    % Calcular el punto medio del intervalo
+    r_externo = (a + b) / 2;
+    
+    % Evaluar la función en el punto medio
+    f_r_externo = fun(r_externo);
+    
+    % Verificar si se encontró una solución exacta
+    if f_r_externo == 0
+        break;
+    end
+    
+    % Actualizar los límites del intervalo
+    if sign(f_r_externo) == sign(fun(a))
+        a = r_externo;
+    else
+        b = r_externo;
+    end
+    
+    % Calcular el error relativo
+    error = abs(f_r_externo);
+    
+    % Incrementar el contador de iteraciones
+    iteracion = iteracion + 1;
+end
+
+% Mostrar el resultado
+fprintf('Radio externo aproximado: %.6f metros\n', r_externo);
+fprintf('Error: %.6f\n', error);
+fprintf('Iteraciones: %d\n', iteracion);
