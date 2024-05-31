@@ -13,7 +13,7 @@ function Formulario() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/user', formData, {
+      const response = await axios.post('http://localhost:3001/api/user', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -35,7 +35,7 @@ function Formulario() {
         <input type="number" id="age" name="age" value={formData.age} onChange={handleChange} min="1" required /><br /><br />
         <button type="submit" className="btn btn-primary">Enviar</button>
       </form>
-      {successMessage && <p>{successMessage}</p>}
+      {successMessage && <p id="respuesta">{successMessage}</p>}
     </div>
   );
 }
