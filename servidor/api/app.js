@@ -5,11 +5,10 @@ const rutasMongoDB = require('./rutas/rutasMongoDB');
 const autenticacion = require('./Intermediarios/autenticacion.js'); 
 const Token = require('./Intermediarios/token.js');
 const cors = require('cors');
-
 const router = express.Router();
 
 const app = express();
-const puerto = 3001;
+const puerto = process.env.PORT || 3001;
 
 // Middleware para parsear el body de la solicitud
 app.use(express.json());

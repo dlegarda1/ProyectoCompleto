@@ -22,7 +22,8 @@ const ingresoUsuario = (req, res) => {
   console.log('Edad:', age);
   id = users.length + 1;
   users.push({ id, name, age: edad });
-  res.status(200).json({ id: users[users.length - 1].id, name: users[users.length - 1].name, age: users[users.length - 1].age });
+  //res.status(200).json({ id: users[users.length - 1].id, name: users[users.length - 1].name, age: users[users.length - 1].age });
+  res.status(200).json({ message: `Usuario registrado` });
   console.log(users);
 }
 
