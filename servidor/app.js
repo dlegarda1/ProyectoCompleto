@@ -4,6 +4,7 @@ const connectDB = require('./BaseDatos/conexionmongoDB');
 const rutasMongoDB = require('./rutas/rutasMongoDB');
 const autenticacion = require('./Intermediarios/autenticacion.js'); 
 const Token = require('./Intermediarios/token.js');
+const cors = require('cors');
 
 const router = express.Router();
 
@@ -13,15 +14,18 @@ const puerto = 3001;
 // Middleware para parsear el body de la solicitud
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:5173']
+}))
 
 //escribir un metodo get
-app.get('/', (req, res) => {
+app.get('/inicio', (req, res) => {
   res.send('¡Hola, mundo!');
 });
 
 // Rutas
-app.use('/api/user',Token.verificacionTokenCookie, rutasUsuario);
+app.use('/api/user',rutasUsuario);
 app.use('/api/mongoDB', rutasMongoDB);
 
 /*
