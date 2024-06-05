@@ -14,7 +14,7 @@ const path = require('path');
 const router = express.Router();
 
 const app = express();
-const puerto = 3002;
+const puerto = process.env.PORT || 3002;
 
 // Middleware para parsear el body de la solicitud
 app.use(express.json());
