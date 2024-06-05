@@ -5,7 +5,7 @@ import axios from 'axios';
 function Formulario() {
   const [formData, setFormData] = useState({ name: '', age: '' });
   const [successMessage, setSuccessMessage] = useState('');
-  const url="https://servidor-gilt.vercel.app/home";
+  const url="https://servidor-gilt.vercel.app/";
   //********************************* */
   //carga de variable de entorno para servidor
   const API_URL = import.meta.env.VITE_API_URL;
