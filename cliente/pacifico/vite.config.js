@@ -5,6 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   "env": {
-    "REACT_APP_API_URL": "https://servidor-gilt.vercel.app/home"
+    "REACT_APP_API_URL": "https://servidor-gilt.vercel.app/"
   }
 })
