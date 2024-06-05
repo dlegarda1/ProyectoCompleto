@@ -6,6 +6,7 @@ const autenticacion = require('./Intermediarios/autenticacion.js');
 const Token = require('./Intermediarios/token.js');
 const cors = require('cors');
 const router = express.Router();
+const cors = require('cors');
 
 const app = express();
 const puerto = process.env.PORT || 3001;
@@ -15,7 +16,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
   credentials: true,
-  origin: ['http://localhost:5173']
+  origin: ['http://localhost:5173'],
+  origin: 'https://ejemplodesplieguereact.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
 //escribir un metodo get

@@ -22,7 +22,7 @@ app.get('/resource', isAuthenticated, (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-  res.send('¡esto es home!');
+  res.send('¡esto es un home!');
 });
 
 // Middleware para parsear el body de la solicitud
