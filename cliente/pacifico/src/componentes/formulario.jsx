@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
+
+
+
+
 function Formulario() {
   const [formData, setFormData] = useState({ name: '', age: '' });
   const [successMessage, setSuccessMessage] = useState('');
-
+  
+  //********************************* */
+  //carga de variable de entorno para servidor
+  const API_URL = import.meta.env.VITE_API_URL;
+  console.log(API_URL);
+  const endpoint=`${API_URL}/api/user`;
+    console.log("endpoint desarrollo",endpoint);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -13,7 +24,8 @@ function Formulario() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/api/user', formData, {
+      
+      const response = await axios.post(endpoint, formData, {
         headers: {
           'Content-Type': 'application/json',
         },
