@@ -1,33 +1,46 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
-const puerto = 3001;
+const rutasUsuario = require('./rutas/rutasUser');
+const connectDB = require('./BaseDatos/conexionmongoDB');
+const rutasMongoDB = require('./rutas/rutasMongoDB');
+const autenticacion = require('./Intermediarios/autenticacion.js'); 
+const Token = require('./Intermediarios/token.js');
+const cors = require('cors');
+const router = express.Router();
 
-// Middleware de autenticación
-function isAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-      return next();
-  }
-  res.redirect(`http://localhost:3001/login`);
-}
+const app = express();
+const puerto = process.env.PORT || 3001;
+
+// Middleware para parsear el body de la solicitud
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:5173','https://ejemplodesplieguereact.vercel.app'],  
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}))
 
 //  Para evaluar servidor iniciado
 app.get('/', (req, res) => {
   res.send('¡Hola, mundo!');
 });
 
-// Ruta protegida
-app.get('/resource', isAuthenticated, (req, res) => {
-  res.send('Este es un recurso protegido');
+// Rutas
+app.use('/api/user', rutasUsuario);
+app.use('/api/mongoDB', rutasMongoDB);
+
+/*
+app.get('/api/login',autenticacion,Token.envioToken,async(req,res)=>{
+  res.json({ mensaje: "acceso concedido" });
+});
+*/
+app.get('/api/login', autenticacion, Token.envioTokenCookie, async (req, res) => {
+  res.json({ mensaje: "acceso concedido" });
 });
 
 app.get('/home', (req, res) => {
   res.send('¡esto es un home!');
 });
-
-// Middleware para parsear el body de la solicitud
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 //arreglos con datos predefinidos
 let users = [
@@ -63,7 +76,7 @@ app.post('/api/user', (req, res) => {
   console.log('Nombre:', name);
   console.log('Edad:', age);
   res.json({ message: 'Datos recibidos correctamente' });
-  users.push({ id: users.length + 1, name, age:edad });
+  users.push({ id: users.length + 1, name, age: edad });
   console.log(users);
 });
 
@@ -82,7 +95,7 @@ app.put('/api/user/:id', (req, res) => {
   res.json({ message: 'Nombre actualizado correctamente' });
 });
 
-app.get('/prueba',(req,res)=>{
+app.get('/prueba', (req, res) => {
   res.send('Esto es una prueba');
 });
 

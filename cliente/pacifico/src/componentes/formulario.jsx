@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
 function Formulario() {
   const [formData, setFormData] = useState({ name: '', age: '' });
   const [successMessage, setSuccessMessage] = useState('');
-
+  const url="https://servidor-gilt.vercel.app/home";
+  //********************************* */
+  //carga de variable de entorno para servidor
+  const API_URL = import.meta.env.VITE_API_URL;
+  console.log(API_URL);
+  const endpoint=`${API_URL}/api/user`;
+  const direccion=`${url}/api/user`
+    console.log("endpoint desarrollo",endpoint);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -13,7 +21,8 @@ function Formulario() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/api/user', formData, {
+      
+      const response = await axios.post(direccion, formData, {
         headers: {
           'Content-Type': 'application/json',
         },
