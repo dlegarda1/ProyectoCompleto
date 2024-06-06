@@ -18,8 +18,10 @@ function FormActualizacion() {
         /*const response = await axios.get('http://localhost:3002/basedatos/datos', {
           headers: { Authorization: `Bearer ${token}` }
         });*/      
-        
-        const response = await axiosInstance.get('http://localhost:3002/basedatos/datos',{withCredentials: true});
+        const url_servidor = "https://servidorautenticacion-production.up.railway.app";
+        const endpoint = `${url_servidor}/datos`;
+        console.log("direccion de peticion: "+endpoint);
+        const response = await axiosInstance.get(endpoint,{withCredentials: true});
         setOpciones(response.data);
         console.log(response.data)
       } catch (error) {
