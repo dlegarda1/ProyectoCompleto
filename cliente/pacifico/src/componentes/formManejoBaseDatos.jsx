@@ -23,7 +23,7 @@ function FormProtegidoBD() {
         const cookietoken=getCookieValue('nuevoCookie');
         console.log(cookietoken);
         const url_servidor = "https://servidorautenticacion-production.up.railway.app";
-        const endpoint = `${url_servidor}/mensaje`;
+        const endpoint = `${url_servidor}/datos`;
         console.log("direccion de peticion: "+endpoint);
         const response = await axiosInstance.get(endpoint,{withCredentials: true});
         setData(response.data);
