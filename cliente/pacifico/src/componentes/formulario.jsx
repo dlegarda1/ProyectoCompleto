@@ -12,7 +12,7 @@ function Formulario() {
   console.log(API_URL);
   const endpoint=`${API_URL}/api/user`;
   const direccion=`${url}/api/user`
-    console.log("endpoint desarrollo",endpoint);
+    console.log("endpoint",direccion);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
