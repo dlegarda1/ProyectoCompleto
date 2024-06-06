@@ -22,7 +22,10 @@ function FormProtegidoBD() {
         });*/
         const cookietoken=getCookieValue('nuevoCookie');
         console.log(cookietoken);
-        const response = await axiosInstance.get('http://localhost:3002/basedatos/datos',{withCredentials: true});
+        const url_servidor = "https://servidorautenticacion-production.up.railway.app";
+        const endpoint = `${url_servidor}/mensaje`;
+        console.log("direccion de peticion: "+endpoint);
+        const response = await axiosInstance.get(endpoint,{withCredentials: true});
         setData(response.data);
         console.log(response.data);
       } catch (error) {
