@@ -8,7 +8,10 @@ function FormProtegido() {
     const fetchData = async () => {
       const token = localStorage.getItem('token');
       try {
-        const response = await axios.get('http://localhost:3002/basedatos/mensaje', {
+        const url_servidor = "https://servidorautenticacion-production.up.railway.app";
+      const endpoint = `${url_servidor}/mensaje`;
+      console.log("direccion de peticion: "+endpoint);
+        const response = await axios.get(endpoint, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setData(response.data);
