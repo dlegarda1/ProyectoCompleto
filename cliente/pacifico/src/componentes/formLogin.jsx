@@ -68,6 +68,7 @@ function FormLogin({ onLogin }) {
       Cookies.set('cookieInfo', infocookie, { secure: true, sameSite: 'None' });
       const url_servidor = "https://servidorautenticacion-production.up.railway.app";
       const endpoint = `${url_servidor}/login`;
+      console.log("direccion de peticion: "+endpoint);
       const response = await axios.post(
         endpoint,
         { username, password },
