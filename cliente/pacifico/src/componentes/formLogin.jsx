@@ -7,8 +7,8 @@ function FormLogin({ onLogin }) {
   const [password, setPassword] = useState('');
 
   //funcion para obtener informacion del navegador
-const getBrowserInfo = () => {
-  const userAgent = navigator.userAgent;
+  const getBrowserInfo = () => {
+    const userAgent = navigator.userAgent;
     console.log(userAgent);
     const browserName = (() => {
       if (userAgent.includes('Firefox')) return 'Firefox';
@@ -18,7 +18,7 @@ const getBrowserInfo = () => {
       if (userAgent.includes('MSIE') || userAgent.includes('Trident')) return 'Internet Explorer';
       return 'Unknown';
     })();
-    
+
     const browserVersion = (() => {
       if (userAgent.includes('Firefox')) return userAgent.split('Firefox/')[1];
       if (userAgent.includes('Opera') || userAgent.includes('OPR')) return userAgent.split('OPR/')[1];
@@ -27,27 +27,25 @@ const getBrowserInfo = () => {
       if (userAgent.includes('MSIE') || userAgent.includes('Trident')) return userAgent.split('MSIE ')[1].split(';')[0];
       return 'Unknown';
     })();
-    const windowWidth=(()=>{
+    const windowWidth = (() => {
       return window.innerWidth;
     })();
-    const cookieHabilitado=(()=>{
+    const cookieHabilitado = (() => {
       return navigator.cookieEnabled;
     })();
-    const memoriaPC=(()=>{
+    const memoriaPC = (() => {
       return navigator.deviceMemory;
     })();
-    const procesadorPC=(()=>{
+    const procesadorPC = (() => {
       return navigator.hardwareConcurrency;
-     })();
-     
-     const lenguajeNavegador=(()=>
-     {
-       return navigator.language;
-     })();
-     const navegadorOnline=(()=>
-      {
-        return navigator.onLine;
-      }
+    })();
+
+    const lenguajeNavegador = (() => {
+      return navigator.language;
+    })();
+    const navegadorOnline = (() => {
+      return navigator.onLine;
+    }
     )();
     return {
       userAgent,
@@ -58,23 +56,25 @@ const getBrowserInfo = () => {
       memoriaPC,
       procesadorPC,
       lenguajeNavegador,
-      navegadorOnline      
+      navegadorOnline
     };
-};
-  
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const informacion=getBrowserInfo();
+    const informacion = getBrowserInfo();
     const infocookie = JSON.stringify(informacion);
     try {
-      Cookies.set('cookieInfo',infocookie , { secure: true, sameSite: 'None'});
+      Cookies.set('cookieInfo', infocookie, { secure: true, sameSite: 'None' });
+      const url_servidor = "https://servidorautenticacion-production.up.railway.app";
+      const endpoint = `${url_servidor}/login`;
       const response = await axios.post(
-        'http://localhost:3002/login',
+        endpoint,
         { username, password },
         { withCredentials: true }
       );
       const rol = response.data.rol;
-      
+
       console.log(infocookie);
       console.log(response);
       console.log(rol);
@@ -96,10 +96,9 @@ const getBrowserInfo = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      
+
       <label className="input input-bordered flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" /></svg>
-        <input 
+        <input
           id="username"
           name="username"
           type="text"
@@ -109,15 +108,14 @@ const getBrowserInfo = () => {
         />
       </label>
       <label className="input input-bordered flex items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z" clipRule="evenodd" /></svg>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </label>
       <button className="btn btn-primary" type="submit">Iniciar sesión</button>
     </form>
