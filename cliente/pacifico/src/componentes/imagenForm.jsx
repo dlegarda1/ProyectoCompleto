@@ -14,9 +14,10 @@ const ImagenForm = () => {
 
     const formData = new FormData();
     formData.append('image', file);
-
+    const url_servidor = "https://servidorautenticacion-production.up.railway.app";
+        const endpoint = `${url_servidor}/upload/imagen`;
     try {
-      const response = await fetch('http://localhost:3002/upload/imagen', {
+      const response = await fetch(endpoint, {
         method: 'POST',
         body: formData,
       });
